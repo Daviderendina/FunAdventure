@@ -29,8 +29,16 @@ Questa entità rappresenta un singolo ingresso che viene effettuato al parco, da
 Lo tolgo?
 
 #### Payment
-Descrive il pagamento effettuato dal/dai clienti nei confronti del parco al termine della loro visita. È descritto da un campo float *amount*, che rappresenta il conto totale da pagare per quella *Entrance*, e dalla data e ora del pagamento.
+Descrive il pagamento effettuato dal/dai clienti nei confronti del parco al termine della loro visita. È descritto da un campo float *amount*, che rappresenta il conto totale da pagare per quella *Entrance*, e dalla data e ora del pagamento. *Payment* è una generalizzazione di tre diverse entità: *Voucher*, *CreditCard* e *Cash*.
 
 #### Voucher
-#### CreditCard
+Rappresenta il pagamento effettuato tramite voucher dal cliente. Un pagamento di questo tipo è descritto anche dal numero seriale del voucher utilizzato dal cliente.
+
+#### CreditCard (da chiamare solo card)
+Rappresenta il pagamento effettuato tramite carta/bancomat, e aggiunge un nuovo campo che contiene il numero di transazione del pagamento.
+
 #### Cash
+Rappresenta il pagamento effettuato tramite contanti.
+
+
+### Schema logico
