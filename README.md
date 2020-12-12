@@ -10,7 +10,7 @@ FunAdventure è un applicativo che permette la gestione degli ingressi in un par
 
 ### Schema ER
 
-< immagine schema ER >
+![](img/schemaER.png)
 
 ### Descrizione delle entità
 
@@ -42,3 +42,4 @@ Rappresenta il pagamento effettuato tramite contanti.
 
 
 ### Schema logico
+![](img/modelloLogico.png)
