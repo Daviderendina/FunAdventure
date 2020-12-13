@@ -1,5 +1,7 @@
 # FunAdventure
 
+Link alla repository: https://gitlab.com/daviderendina/2020_assignment3_meet_your_friends
+
 ## Studenti
 Il progetto è stato svolto in autonomia dallo studente Rendina Davide matricola 830730.
 
