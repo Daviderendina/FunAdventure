@@ -10,7 +10,7 @@ FunAdventure è un applicativo che permette la gestione degli ingressi in un par
 
 ## Diagramma di dominio
 
-![](img/dominio.jpg)
+![](img/dominio.png)
 
 ### Descrizione delle classi
 
@@ -26,7 +26,8 @@ Mette in relazione l'accesso al parco con i clienti che l'hanno effettuato. In p
 Questa entità rappresenta un singolo ingresso che viene effettuato al parco. Un ingresso è definito solamente dalla data e ora di quando lo stesso è stato effettuato. Una *Entrance* è in relazione con un *Payment* (con cardinalità 1 - 0..1), che descrive appunto il pagamento effettuato per lo specifico ingresso; il pagamento è definito con relazione 0 poichè potrebbe avvenire in un momento successivo/non essere effettuato per quell'ordine specifico. Una *Entrance* inoltre contiene due insiemi rispettivamente di clienti (che rappresenta appunto il cliente singolo/gruppo che accede al parco) e di attrezzatura, rappresentante tutte le tipologie di attrezzatura (caschi, imbraghi) utilizzati dai clienti di quella *Entrance*.
 
 #### Equipment
-Lo tolgo?
+Rappresenta un singolo equipaggiamento (casco, imbrago, ..) in possesso del parco avventura. È descritto dalla sua data di acquisto e
+dal numero seriale.
 
 #### Payment
 Descrive il pagamento effettuato dal/dai clienti nei confronti del parco al termine della loro visita. È descritto da un campo float *amount*, che rappresenta il conto totale da pagare per quella *Entrance*, e dalla data e ora del pagamento. *Payment* è una generalizzazione di tre diverse entità: *Voucher*, *CreditCard* e *Cash*.
