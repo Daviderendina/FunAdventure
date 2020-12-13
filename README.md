@@ -10,7 +10,7 @@ FunAdventure è un applicativo che permette la gestione degli ingressi in un par
 
 ## Diagramma di dominio
 
-![](img/dominio.png)
+![](img/dominio.PNG)
 
 ### Descrizione delle classi
 
