@@ -12,18 +12,15 @@ public class Client {
     private Client companion;
 
     // TODO accompagnatore deve essere maggiorenne e se client minorenne non può non avere accompagnatore
-    public Client(int id, String name, String surname, Date bDate) {
-        this.id = id;
+    public Client(String name, String surname, Date bDate) {
+        this.id = 1; //TODO
         this.name = name;
         this.surname = surname;
         this.bDate = bDate;
     }
 
-    public Client(int id, String name, String surname, Date bDate, Client companion) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.bDate = bDate;
+    public Client(String name, String surname, Date bDate, Client companion) {
+        this(name, surname, bDate);
         this.companion = companion;
     }
 
