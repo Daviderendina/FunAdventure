@@ -3,6 +3,8 @@ package com.rendinadavide.assignment3.model;
 import com.rendinadavide.assignment3.services.IdGenerator;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Client {
 
@@ -11,19 +13,21 @@ public class Client {
     private String surname;
     private Date bDate;
 
-    private Client companion;
+    private Set<Client> companionSet;
 
-    // TODO accompagnatore deve essere maggiorenne e se client minorenne non può non avere accompagnatore
+    // TODO Se client minorenne non può non avere accompagnatore
     public Client(String name, String surname, Date bDate) {
         this.id = IdGenerator.getIstance().getUID();
         this.name = name;
         this.surname = surname;
         this.bDate = bDate;
+        this.companionSet = new HashSet<>();
     }
 
     public Client(String name, String surname, Date bDate, Client companion) {
         this(name, surname, bDate);
-        this.companion = companion;
+        //TODO controllo che companion è adulto?
+        this.companionSet.add(companion);
     }
 
     public String getId() {
@@ -54,11 +58,13 @@ public class Client {
         this.bDate = bDate;
     }
 
-    public Client getCompanion() {
-        return companion;
+    public Set<Client> getCompanionSet() {
+        return companionSet;
     }
 
-    public void setCompanion(Client companion) {
-        this.companion = companion;
+
+    public void addCompanion(Client client){
+        //TODO aggiungi solo se è maggiorenne
+        this.companionSet.add(client);
     }
 }
