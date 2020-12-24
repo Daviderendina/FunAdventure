@@ -1,27 +1,25 @@
 package com.rendinadavide.assignment3.model.payment;
 
+import com.rendinadavide.assignment3.services.IdGenerator;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
 public abstract class Payment {
 
-    private int id;
+    private String id;
     private float amount;
     private Date date;
 
     public Payment(float amount) {
-        this.id = 1; //TODO
+        this.id = IdGenerator.getIstance().getUID();
         this.amount = amount;
         this.date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public float getAmount() {

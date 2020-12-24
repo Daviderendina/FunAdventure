@@ -1,25 +1,23 @@
 package com.rendinadavide.assignment3.model;
 
+import com.rendinadavide.assignment3.services.IdGenerator;
+
 import java.util.Date;
 
 public class Equipment {
 
-    private int id;
+    private String id;
     private Date purchaseDate;
     private String serialNumber;
 
     public Equipment(Date purchaseDate, String serialNumber) {
-        this.id = 1; //TODO
+        this.id = IdGenerator.getIstance().getUID();
         this.purchaseDate = purchaseDate;
         this.serialNumber = serialNumber;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getPurchaseDate() {

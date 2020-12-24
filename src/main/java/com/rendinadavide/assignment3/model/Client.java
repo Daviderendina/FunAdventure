@@ -1,10 +1,12 @@
 package com.rendinadavide.assignment3.model;
 
+import com.rendinadavide.assignment3.services.IdGenerator;
+
 import java.util.Date;
 
 public class Client {
 
-    private int id;
+    private String id;
     private String name;
     private String surname;
     private Date bDate;
@@ -13,7 +15,7 @@ public class Client {
 
     // TODO accompagnatore deve essere maggiorenne e se client minorenne non può non avere accompagnatore
     public Client(String name, String surname, Date bDate) {
-        this.id = 1; //TODO
+        this.id = IdGenerator.getIstance().getUID();
         this.name = name;
         this.surname = surname;
         this.bDate = bDate;
@@ -24,12 +26,8 @@ public class Client {
         this.companion = companion;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
