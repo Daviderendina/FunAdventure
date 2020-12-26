@@ -2,10 +2,15 @@ package com.rendinadavide.assignment3.model;
 
 import com.rendinadavide.assignment3.services.IdGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Client {
 
     private String id;
@@ -13,6 +18,10 @@ public class Client {
     private String surname;
     private Date bDate;
 
+    @OneToMany
+    @JoinTable(name = "CompanionClient",
+            joinColumns = @JoinColumn(name = "ClientID"),
+            inverseJoinColumns = @JoinColumn(name = "CompanionID"))
     private Set<Client> companionSet;
 
     // TODO Se client minorenne non può non avere accompagnatore

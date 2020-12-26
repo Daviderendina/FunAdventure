@@ -2,10 +2,14 @@ package com.rendinadavide.assignment3.model.payment;
 
 import com.rendinadavide.assignment3.services.IdGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Entity
+@MappedSuperclass
 public abstract class Payment {
 
     private String id;

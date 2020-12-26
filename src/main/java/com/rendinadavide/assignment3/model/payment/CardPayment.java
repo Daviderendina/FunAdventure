@@ -1,5 +1,8 @@
 package com.rendinadavide.assignment3.model.payment;
 
+import javax.persistence.Entity;
+
+@Entity
 public class CardPayment extends Payment {
 
     private String transactionNumber;

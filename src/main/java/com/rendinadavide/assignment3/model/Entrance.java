@@ -3,18 +3,25 @@ package com.rendinadavide.assignment3.model;
 import com.rendinadavide.assignment3.model.payment.Payment;
 import com.rendinadavide.assignment3.services.IdGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Entrance {
 
+    @Id
     private String id;
     private Date date;
 
+    @ManyToMany
     private Set<Client> clientCollection;
+    @ManyToMany
     private Set<Equipment> equipmentCollection;
     private Payment payment;
 

@@ -2,10 +2,14 @@ package com.rendinadavide.assignment3.model;
 
 import com.rendinadavide.assignment3.services.IdGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Equipment {
 
+    @Id
     private String id;
     private Date purchaseDate;
     private String serialNumber;

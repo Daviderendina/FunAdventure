@@ -1,6 +1,8 @@
 package com.rendinadavide.assignment3.model.payment;
 
+import javax.persistence.Entity;
 
+@Entity
 public class VoucherPayment extends Payment {
 
     private String serialNumber;
