@@ -1,7 +1,7 @@
-package com.rendinadavide.assignment3.model;
+package com.rendinadavide.assignment3.repository.model;
 
-import com.rendinadavide.assignment3.model.payment.Payment;
-import com.rendinadavide.assignment3.services.IdGenerator;
+import com.rendinadavide.assignment3.repository.model.payment.Payment;
+import com.rendinadavide.assignment3.service.IdGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

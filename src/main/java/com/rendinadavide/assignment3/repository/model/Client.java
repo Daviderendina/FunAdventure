@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.model;
+package com.rendinadavide.assignment3.repository.model;
 
-import com.rendinadavide.assignment3.services.IdGenerator;
+import com.rendinadavide.assignment3.service.IdGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,19 +24,12 @@ public class Client {
             inverseJoinColumns = @JoinColumn(name = "CompanionID"))
     private Set<Client> companionSet;
 
-    // TODO Se client minorenne non può non avere accompagnatore
     public Client(String name, String surname, Date bDate) {
         this.id = IdGenerator.getIstance().getUID();
         this.name = name;
         this.surname = surname;
         this.bDate = bDate;
         this.companionSet = new HashSet<>();
-    }
-
-    public Client(String name, String surname, Date bDate, Client companion) {
-        this(name, surname, bDate);
-        //TODO controllo che companion è adulto?
-        this.companionSet.add(companion);
     }
 
     public String getId() {
@@ -72,8 +65,11 @@ public class Client {
     }
 
 
-    public void addCompanion(Client client){
-        //TODO aggiungi solo se è maggiorenne
-        this.companionSet.add(client);
+    public boolean addCompanion(Client client){
+        if(true /*TODO: client maggiorenne*/) {
+            this.companionSet.add(client);
+            return true;
+        }
+        return false;
     }
 }

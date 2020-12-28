@@ -1,4 +1,4 @@
-package com.rendinadavide.assignment3.services;
+package com.rendinadavide.assignment3.service;
 
 import java.util.UUID;
 
