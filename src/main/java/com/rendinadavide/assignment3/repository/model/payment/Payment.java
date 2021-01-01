@@ -2,16 +2,16 @@ package com.rendinadavide.assignment3.repository.model.payment;
 
 import com.rendinadavide.assignment3.service.IdGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Payment {
 
+    @Id
     private String id;
     private float amount;
     private Date date;
