@@ -20,6 +20,8 @@ public class Equipment {
         this.serialNumber = serialNumber;
     }
 
+    public Equipment(){};
+
     public String getId() {
         return id;
     }
