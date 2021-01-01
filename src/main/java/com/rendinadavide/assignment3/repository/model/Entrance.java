@@ -6,6 +6,7 @@ import com.rendinadavide.assignment3.service.IdGenerator;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -23,6 +24,7 @@ public class Entrance {
     private Set<Client> clientCollection;
     @ManyToMany
     private Set<Equipment> equipmentCollection;
+    @OneToOne
     private Payment payment;
 
     public Entrance() {
