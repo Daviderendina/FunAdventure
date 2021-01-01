@@ -5,6 +5,7 @@ import com.rendinadavide.assignment3.service.IdGenerator;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Equipment {
@@ -40,5 +41,15 @@ public class Equipment {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equipment equipment = (Equipment) o;
+        return Objects.equals(id, equipment.id) &&
+                Objects.equals(purchaseDate, equipment.purchaseDate) &&
+                Objects.equals(serialNumber, equipment.serialNumber);
     }
 }
