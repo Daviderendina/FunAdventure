@@ -18,7 +18,8 @@ public class Entrance {
 
     @Id
     private String id;
-    private Date date;
+    private Date entryDate;
+    private Date exitDate;
 
     @ManyToMany
     private Set<Client> clientCollection;
@@ -29,7 +30,7 @@ public class Entrance {
 
     public Entrance() {
         this.id = IdGenerator.getIstance().getUID();
-        this.date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.entryDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         this.clientCollection = new HashSet<>();
         this.equipmentCollection = new HashSet<>();
     }
@@ -38,12 +39,12 @@ public class Entrance {
         return id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getEntryDate() {
+        return entryDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
 
     public Set<Client> getClientCollection() {
@@ -68,5 +69,13 @@ public class Entrance {
 
     public void addEquipment(Equipment equipment){
         this.equipmentCollection.add(equipment);
+    }
+
+    public void setExitDate(Date exitDate) {
+        if(exitDate.compareTo(entryDate) > 0) this.exitDate = exitDate;
+    }
+
+    public Date getExitDate() {
+        return exitDate;
     }
 }
