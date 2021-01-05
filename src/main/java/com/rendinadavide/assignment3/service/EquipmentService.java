@@ -1,21 +1,24 @@
 package com.rendinadavide.assignment3.service;
 
-import com.rendinadavide.assignment3.repository.model.Equipment;
+import com.rendinadavide.assignment3.repository.Equipment;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-public class EquipmentService {
+public class EquipmentService implements IEquipmentService {
 
     @PersistenceContext
-    private EntityManager em; //TODO sistemare creazione per tutti
+    private EntityManager em;
+    //TODO sistemare creazione per tutti con injection
+    //TODO mancano i rollback delle transazioni
 
     public EquipmentService(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
         em = emf.createEntityManager();
     }
 
+    @Override
     public Equipment create(Date purchaseDate, String sn){
         Equipment newEquip = new Equipment(purchaseDate, sn);
         EntityTransaction tx = em.getTransaction();
@@ -25,13 +28,15 @@ public class EquipmentService {
         return newEquip;
     }
 
+    @Override
     public void delete(Equipment equipment){
         em.getTransaction().begin();
         em.remove(equipment);
         em.getTransaction().commit();
     }
 
-    public Equipment find(String equipmentId){
+    @Override
+    public Equipment findById(String equipmentId){
         return em.find(Equipment.class, equipmentId);
     }
 
