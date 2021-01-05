@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-public class ClientService implements IClientService { //TODO faccio interface service?
+public class ClientService implements IClientService {
 
     @PersistenceContext
     private EntityManager em;
@@ -27,7 +27,6 @@ public class ClientService implements IClientService { //TODO faccio interface s
     }
 
     public boolean addCompanion(Client client, Client companion){
-        //TODO update ?
         if(companion.calculateAge() >= 18 && client.getId() != companion.getId()) {
             client.addCompanion(companion);
             return true;
@@ -42,8 +41,6 @@ public class ClientService implements IClientService { //TODO faccio interface s
         em.remove(client);
         tx.commit();
     }
-
-    // public void updateClient(){/*TODO va fatto l'update una volta che è legato dall'EM ?*/};
 
     @Override
     public Client findById(String clientId){
