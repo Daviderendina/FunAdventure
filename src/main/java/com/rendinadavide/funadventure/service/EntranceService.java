@@ -44,11 +44,8 @@ public class EntranceService implements IEntranceService {
 
     @Override
     public List<Entrance> findAll() {
-        //TODO
-        return null;
+        return em.createQuery("Select e from Entrance e").getResultList();
     }
-
-    //TODO per addPayment devo fare un metodo che chiude tutto? Secondo me sì, e poi chiamo pure la merge da dentro quel metodo
 
     @Override
     public void delete(Entrance entrance) {

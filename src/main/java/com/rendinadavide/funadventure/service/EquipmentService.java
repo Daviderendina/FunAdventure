@@ -10,8 +10,6 @@ public class EquipmentService implements IEquipmentService {
 
     @PersistenceContext
     private EntityManager em;
-    //TODO sistemare creazione per tutti con injection
-    //TODO mancano i rollback delle transazioni
 
     public EquipmentService(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
