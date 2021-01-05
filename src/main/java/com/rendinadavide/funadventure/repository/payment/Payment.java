@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.repository.payment;
+package com.rendinadavide.funadventure.repository.payment;
 
-import com.rendinadavide.assignment3.utils.IdGenerator;
+import com.rendinadavide.funadventure.utils.IdGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

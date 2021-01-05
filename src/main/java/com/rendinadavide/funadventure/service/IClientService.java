@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.service;
+package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.assignment3.repository.Client;
+import com.rendinadavide.funadventure.repository.Client;
 
 import java.util.Date;
 

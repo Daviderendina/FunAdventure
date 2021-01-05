@@ -1,4 +1,4 @@
-package com.rendinadavide.assignment3.repository.payment;
+package com.rendinadavide.funadventure.repository.payment;
 
 import javax.persistence.Entity;
 

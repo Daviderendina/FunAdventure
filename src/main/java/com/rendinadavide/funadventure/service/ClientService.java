@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.service;
+package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.assignment3.repository.Client;
+import com.rendinadavide.funadventure.repository.Client;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,8 +27,12 @@ public class ClientService implements IClientService { //TODO faccio interface s
     }
 
     public boolean addCompanion(Client client, Client companion){
-        //TODO non devo fare niente sul DB ?
-        return client.addCompanion(companion);
+        //TODO update ?
+        if(companion.calculateAge() >= 18 && client.getId() != companion.getId()) {
+            client.addCompanion(companion);
+            return true;
+        }
+        return false;
     }
 
     @Override

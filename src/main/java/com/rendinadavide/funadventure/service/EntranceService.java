@@ -1,8 +1,8 @@
-package com.rendinadavide.assignment3.service;
+package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.assignment3.repository.Client;
-import com.rendinadavide.assignment3.repository.Entrance;
-import com.rendinadavide.assignment3.repository.Equipment;
+import com.rendinadavide.funadventure.repository.Client;
+import com.rendinadavide.funadventure.repository.Entrance;
+import com.rendinadavide.funadventure.repository.Equipment;
 
 import javax.persistence.*;
 import java.util.List;

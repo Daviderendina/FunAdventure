@@ -1,8 +1,11 @@
-package com.rendinadavide.assignment3.repository;
+package com.rendinadavide.funadventure.repository;
 
-import com.rendinadavide.assignment3.utils.IdGenerator;
+import com.rendinadavide.funadventure.utils.IdGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,12 +65,13 @@ public class Client {
         return companionSet;
     }
 
+    public int calculateAge(){
+        LocalDate bDay = LocalDate.ofInstant(bDate.toInstant(), ZoneId.systemDefault());
+        return Period.between(bDay, LocalDate.now()).getYears();
+    }
 
-    public boolean addCompanion(Client client){
-        if(true /*TODO: client maggiorenne*/) {
-            this.companionSet.add(client);
-            return true;
-        }
-        return false;
+
+    public void addCompanion(Client client){
+        this.companionSet.add(client);
     }
 }

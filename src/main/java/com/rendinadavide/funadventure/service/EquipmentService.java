@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.service;
+package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.assignment3.repository.Equipment;
+import com.rendinadavide.funadventure.repository.Equipment;
 
 import javax.persistence.*;
 import java.util.Date;

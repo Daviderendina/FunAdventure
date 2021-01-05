@@ -1,4 +1,4 @@
-package com.rendinadavide.assignment3.service;
+package com.rendinadavide.funadventure.service;
 
 import java.util.List;
 
