@@ -1,45 +1,34 @@
 package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.funadventure.repository.Equipment;
+import com.rendinadavide.funadventure.domain.Equipment;
+import com.rendinadavide.funadventure.repository.EquipmentRepository;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-public class EquipmentService implements IEquipmentService {
+public class EquipmentService {
 
-    @PersistenceContext
-    private EntityManager em;
+    private EquipmentRepository equipmentRepository;
 
     public EquipmentService(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
-        em = emf.createEntityManager();
+        equipmentRepository = new EquipmentRepository();
     }
 
-    @Override
     public Equipment create(Date purchaseDate, String sn){
         Equipment newEquip = new Equipment(purchaseDate, sn);
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(newEquip);
-        tx.commit();
+        equipmentRepository.save(newEquip);
         return newEquip;
     }
 
-    @Override
-    public void delete(Equipment equipment){
-        em.getTransaction().begin();
-        em.remove(equipment);
-        em.getTransaction().commit();
-    }
-
-    @Override
     public Equipment findById(String equipmentId){
-        return em.find(Equipment.class, equipmentId);
+        return equipmentRepository.findById(equipmentId);
     }
 
     public List<Equipment> findAll(){
-        return em.createQuery("Select e from Equipment e").getResultList();
+        return equipmentRepository.findAll();
     }
 
+    public void delete(Equipment equipment){
+        equipmentRepository.delete(equipment);
+    }
 }

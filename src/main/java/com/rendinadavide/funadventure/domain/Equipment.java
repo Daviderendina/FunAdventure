@@ -1,4 +1,4 @@
-package com.rendinadavide.funadventure.repository;
+package com.rendinadavide.funadventure.domain;
 
 import com.rendinadavide.funadventure.utils.IdGenerator;
 

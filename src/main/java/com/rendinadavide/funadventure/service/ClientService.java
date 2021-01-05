@@ -1,55 +1,47 @@
 package com.rendinadavide.funadventure.service;
 
-import com.rendinadavide.funadventure.repository.Client;
+import com.rendinadavide.funadventure.domain.Client;
+import com.rendinadavide.funadventure.repository.ClientRepository;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-public class ClientService implements IClientService {
+public class ClientService {
 
-    @PersistenceContext
-    private EntityManager em;
+    private ClientRepository clientRepository;
 
     public ClientService(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
-        em = emf.createEntityManager();
+        clientRepository = new ClientRepository();
     }
 
-    @Override
     public Client create(String name, String surname, Date bDate){
         Client newClient = new Client(name, surname, bDate);
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(newClient);
-        tx.commit();
-        return newClient;
+        if(bDate.compareTo(new Date()) < 0){
+            clientRepository.save(newClient);
+            return newClient;
+        }
+        return null;
     }
 
     public boolean addCompanion(Client client, Client companion){
-        if(companion.calculateAge() >= 18 && client.getId() != companion.getId()) {
+        if(companion.calculateAge() >= 18 && !client.getId().equals(companion.getId())) {
             client.addCompanion(companion);
             return true;
         }
         return false;
     }
 
-    @Override
     public void delete(Client client) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.remove(client);
-        tx.commit();
+        clientRepository.delete(client);
     }
 
-    @Override
     public Client findById(String clientId){
-        return em.find(Client.class, clientId);
+        return clientRepository.findById(clientId);
     };
 
-    @Override
     public List<Client> findAll(){
-        return em.createQuery("Select c from Client c").getResultList();
+        return clientRepository.findAll();
     }
 
 }

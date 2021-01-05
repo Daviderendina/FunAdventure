@@ -1,8 +1,10 @@
-package com.rendinadavide.funadventure.service;
+package com.rendinadavide.funadventure.repository;
 
 import java.util.List;
 
-public interface IService <T> {
+public interface Repository<T> {
+
+    T save(T t);
 
     T findById(String Id);
 

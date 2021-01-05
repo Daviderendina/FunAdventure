@@ -1,6 +1,6 @@
-package com.rendinadavide.funadventure.repository;
+package com.rendinadavide.funadventure.domain;
 
-import com.rendinadavide.funadventure.repository.payment.Payment;
+import com.rendinadavide.funadventure.domain.payment.Payment;
 import com.rendinadavide.funadventure.utils.IdGenerator;
 
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Entrance {
+public class Access {
 
     @Id
     private String id;
@@ -28,7 +28,7 @@ public class Entrance {
     @OneToOne
     private Payment payment;
 
-    public Entrance() {
+    public Access() {
         this.id = IdGenerator.getIstance().getUID();
         this.entryDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         this.clientCollection = new HashSet<>();
