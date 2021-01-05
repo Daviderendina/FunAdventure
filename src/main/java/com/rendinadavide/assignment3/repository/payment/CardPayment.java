@@ -1,4 +1,4 @@
-package com.rendinadavide.assignment3.repository.model.payment;
+package com.rendinadavide.assignment3.repository.payment;
 
 import javax.persistence.Entity;
 

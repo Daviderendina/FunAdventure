@@ -1,11 +1,8 @@
-package com.rendinadavide.assignment3.repository.model;
+package com.rendinadavide.assignment3.repository;
 
-import com.rendinadavide.assignment3.service.IdGenerator;
+import com.rendinadavide.assignment3.utils.IdGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +10,7 @@ import java.util.Set;
 @Entity
 public class Client {
 
+    @Id
     private String id;
     private String name;
     private String surname;

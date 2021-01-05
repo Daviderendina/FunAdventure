@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.repository.model.payment;
+package com.rendinadavide.assignment3.repository.payment;
 
-import com.rendinadavide.assignment3.service.IdGenerator;
+import com.rendinadavide.assignment3.utils.IdGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

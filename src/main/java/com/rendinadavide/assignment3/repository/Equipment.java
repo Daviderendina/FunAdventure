@@ -1,6 +1,6 @@
-package com.rendinadavide.assignment3.repository.model;
+package com.rendinadavide.assignment3.repository;
 
-import com.rendinadavide.assignment3.service.IdGenerator;
+import com.rendinadavide.assignment3.utils.IdGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

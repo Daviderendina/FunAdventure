@@ -1,7 +1,7 @@
-package com.rendinadavide.assignment3.repository.model;
+package com.rendinadavide.assignment3.repository;
 
-import com.rendinadavide.assignment3.repository.model.payment.Payment;
-import com.rendinadavide.assignment3.service.IdGenerator;
+import com.rendinadavide.assignment3.repository.payment.Payment;
+import com.rendinadavide.assignment3.utils.IdGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -77,5 +77,13 @@ public class Entrance {
 
     public Date getExitDate() {
         return exitDate;
+    }
+
+    public void setClientCollection(Set<Client> clientCollection) {
+        this.clientCollection = clientCollection;
+    }
+
+    public void setEquipmentCollection(Set<Equipment> equipmentCollection) {
+        this.equipmentCollection = equipmentCollection;
     }
 }
