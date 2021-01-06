@@ -9,9 +9,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Access {
@@ -22,17 +22,17 @@ public class Access {
     private Date exitDate;
 
     @ManyToMany
-    private Set<Client> clientCollection;
+    private List<Client> clientCollection;
     @ManyToMany
-    private Set<Equipment> equipmentCollection;
+    private List<Equipment> equipmentCollection;
     @OneToOne
     private Payment payment;
 
     public Access() {
         this.id = IdGenerator.getIstance().getUID();
         this.entryDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        this.clientCollection = new HashSet<>();
-        this.equipmentCollection = new HashSet<>();
+        this.clientCollection = new ArrayList<>();
+        this.equipmentCollection = new ArrayList<>();
     }
 
     public String getId() {
@@ -47,11 +47,11 @@ public class Access {
         this.entryDate = entryDate;
     }
 
-    public Set<Client> getClientCollection() {
+    public List<Client> getClientCollection() {
         return clientCollection;
     }
 
-    public Set<Equipment> getEquipmentCollection() {
+    public List<Equipment> getEquipmentCollection() {
         return equipmentCollection;
     }
 
@@ -79,11 +79,11 @@ public class Access {
         return exitDate;
     }
 
-    public void setClientCollection(Set<Client> clientCollection) {
+    public void setClientCollection(List<Client> clientCollection) {
         this.clientCollection = clientCollection;
     }
 
-    public void setEquipmentCollection(Set<Equipment> equipmentCollection) {
+    public void setEquipmentCollection(List<Equipment> equipmentCollection) {
         this.equipmentCollection = equipmentCollection;
     }
 }
