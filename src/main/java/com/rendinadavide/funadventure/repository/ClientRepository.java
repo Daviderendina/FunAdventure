@@ -33,7 +33,7 @@ public class ClientRepository implements Repository<Client> {
 
     @Override
     public List<Client> findAll() {
-        return em.createQuery("Select c from Client c").getResultList();
+        return em.createQuery("FROM Client").getResultList();
     }
 
     @Override

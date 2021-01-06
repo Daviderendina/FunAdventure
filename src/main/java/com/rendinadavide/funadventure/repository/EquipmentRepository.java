@@ -33,7 +33,7 @@ public class EquipmentRepository implements Repository<Equipment> {
 
     @Override
     public List<Equipment> findAll() {
-        return em.createQuery("Select e from Equipment e").getResultList();
+        return em.createQuery("FROM Equipment").getResultList();
     }
 
     @Override

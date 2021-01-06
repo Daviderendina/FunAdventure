@@ -1,6 +1,8 @@
 package com.rendinadavide.funadventure.repository;
 
 import com.rendinadavide.funadventure.domain.Access;
+import com.rendinadavide.funadventure.domain.Client;
+import com.rendinadavide.funadventure.domain.Equipment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,6 +22,7 @@ public class AccessRepository implements Repository<Access> {
     public boolean save(Access access) {
         em.getTransaction().begin();
         em.persist(access);
+        if(access.getPayment() != null) em.persist(access.getPayment());
         em.getTransaction().commit();
         return true;
     }
@@ -31,7 +34,7 @@ public class AccessRepository implements Repository<Access> {
 
     @Override
     public List<Access> findAll() {
-        return em.createQuery("Select a from Access a").getResultList();
+        return em.createQuery("FROM Access").getResultList();
     }
 
     @Override
@@ -41,12 +44,19 @@ public class AccessRepository implements Repository<Access> {
         em.getTransaction().commit();
     }
 
-    // TODO lascio con gli ID ?
-    public List<String> findActiveEquipmentIds(){
-        return em.createQuery("SELECT id from Access a join Access_Client ec on ec.Access_id = a.id WHERE a.exitDate is NULL").getResultList();
+    public void update(Access access){
+        em.getTransaction().begin();
+        if(access.getPayment() != null) em.persist(access.getPayment());
+        Access a = em.merge(access);
+        em.flush();
+        em.getTransaction().commit();
     }
 
-    public List<String> findActiveClientsIds(){
-        return em.createQuery("SELECT id from Access a join Access_Client ec on ec.Access_id = a.id WHERE a.exitDate is NULL").getResultList();
+    public List<Equipment> findEquipmentInUse(){
+        return em.createQuery("Select ec from Access a join a.equipmentCollection ec where exitDate is null").getResultList();
+    }
+
+    public List<Client> findClientWithActiveAccess(){
+        return em.createQuery("Select c from Access a join a.clientCollection c where exitDate is null").getResultList();
     }
 }
