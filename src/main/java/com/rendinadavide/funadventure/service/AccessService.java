@@ -3,10 +3,11 @@ package com.rendinadavide.funadventure.service;
 import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Equipment;
+import com.rendinadavide.funadventure.domain.payment.Payment;
 import com.rendinadavide.funadventure.repository.AccessRepository;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public class AccessService {
 
@@ -16,15 +17,20 @@ public class AccessService {
         accessRepository = new AccessRepository();
     }
 
-    public Access create(Set<Client> clientList, Set<Equipment> equipmentList) {
+    public Access create(List<Client> clientList, List<Equipment> equipmentList) {
 
-        List<String> activeClientsIds = accessRepository.findActiveClientsIds();
-        long matchClient = equipmentList.stream().filter(client -> activeClientsIds.contains(client.getId())).count();
-        if(matchClient > 0) return null;
+        //TODO vedere se funzia
+        List<Equipment> equipmentInUse = findEquipmentInUse();
+        //long matchEquip = equipmentList.stream().filter(equipment -> equipmentInUse.contains(equipment)).count();
+        //if(matchEquip > 0) return null;
+        equipmentInUse.retainAll(equipmentList);
+        if(equipmentInUse.size() > 0) return null;
 
-        List<String> activeEquipIds = accessRepository.findActiveEquipmentIds();
-        long matchEquip = equipmentList.stream().filter(equipment -> activeEquipIds.contains(equipment.getId())).count();
-        if(matchEquip > 0) return null;
+        List<Client> clientWithActiveAccess = findClientWithActiveAccess();
+        //long matchClient = equipmentList.stream().filter(client -> clientWithActiveAccess.contains(client)).count();
+        //if(matchClient > 0) return null;
+        clientWithActiveAccess.retainAll(clientList);
+        if(clientWithActiveAccess.size() > 0) return null;
 
         Access access = new Access();
         access.setClientCollection(clientList);
@@ -46,4 +52,26 @@ public class AccessService {
     public void delete(Access access) {
         accessRepository.delete(access);
     }
+
+    public boolean payAndCloseAccess(Access access, Payment payment){
+        if(payment.getAmount() < 0) return false;
+        //if(paymentRepository.findById(payment.getId()) != null) return false;
+        if(access.getPayment() != null) return false;
+
+        access.setPayment(payment);
+        access.setExitDate(new Date());
+        accessRepository.update(access);
+
+        return true;
+    }
+
+    public List<Equipment> findEquipmentInUse(){
+        return accessRepository.findEquipmentInUse();
+    }
+
+    public List<Client> findClientWithActiveAccess(){
+        return accessRepository.findClientWithActiveAccess();
+    }
+
+
 }

@@ -16,8 +16,8 @@ public class ClientService {
     }
 
     public Client create(String name, String surname, Date bDate){
-        Client newClient = new Client(name, surname, bDate);
         if(bDate.compareTo(new Date()) < 0){
+            Client newClient = new Client(name, surname, bDate);
             clientRepository.save(newClient);
             return newClient;
         }

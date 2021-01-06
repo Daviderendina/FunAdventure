@@ -3,6 +3,7 @@ package com.rendinadavide.funadventure.service;
 import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
+import com.rendinadavide.funadventure.domain.payment.Payment;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ServiceFacade {
         return clientService.create(name, surname, bDate);
     }
 
-    public Access createAccess(Set<Client> clientSet, Set<Equipment> equipmentSet){
+    public Access createAccess(List<Client> clientSet, List<Equipment> equipmentSet){
         return accessService.create(clientSet, equipmentSet);
     }
 
@@ -59,6 +60,14 @@ public class ServiceFacade {
         return equipmentService.findAll();
     }
 
+    public List<Equipment> findEquipmentInUse(){
+        return accessService.findEquipmentInUse();
+    }
+
+    public List<Client> findClientWithActiveAccess(){
+        return accessService.findClientWithActiveAccess();
+    }
+
     //update
 
     public void deleteClient(Client client){
@@ -71,6 +80,10 @@ public class ServiceFacade {
 
     public void deleteAccess(Access access){
         accessService.delete(access);
+    }
+
+    public void payAndCloseAccess(Payment payment, Access access){
+        accessService.payAndCloseAccess(access, payment);
     }
 
 
