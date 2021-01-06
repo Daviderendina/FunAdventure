@@ -18,12 +18,12 @@ public class EquipmentRepository implements Repository<Equipment> {
     }
 
     @Override
-    public Equipment save(Equipment equipment) {
+    public boolean save(Equipment equipment) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         em.persist(equipment);
         tx.commit();
-        return equipment;
+        return true;
     }
 
     @Override
@@ -38,6 +38,7 @@ public class EquipmentRepository implements Repository<Equipment> {
 
     @Override
     public void delete(Equipment equipment) {
+        //TODO bool anche qui?
         em.getTransaction().begin();
         em.remove(equipment);
         em.getTransaction().commit();

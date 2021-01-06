@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Repository<T> {
 
-    T save(T t);
+    boolean save(T t);
 
     T findById(String Id);
 

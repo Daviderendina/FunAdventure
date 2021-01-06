@@ -1,8 +1,6 @@
 package com.rendinadavide.funadventure.repository;
 
 import com.rendinadavide.funadventure.domain.Access;
-import com.rendinadavide.funadventure.domain.Client;
-import com.rendinadavide.funadventure.domain.Equipment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,11 +17,11 @@ public class AccessRepository implements Repository<Access> {
     }
 
     @Override
-    public Access save(Access access) {
+    public boolean save(Access access) {
         em.getTransaction().begin();
         em.persist(access);
         em.getTransaction().commit();
-        return access;
+        return true;
     }
 
     @Override

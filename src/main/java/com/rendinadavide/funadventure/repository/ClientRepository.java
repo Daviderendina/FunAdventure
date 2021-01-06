@@ -19,11 +19,11 @@ public class ClientRepository implements Repository<Client> {
 
 
     @Override
-    public Client save(Client client) {
+    public boolean save(Client client) {
         em.getTransaction().begin();
         em.persist(client);
         em.getTransaction().commit();
-        return client;
+        return true;
     }
 
     @Override

@@ -17,8 +17,8 @@ public class PaymentRepository implements Repository<Payment> {
     }
 
     @Override
-    public Payment save(Payment payment) {
-        return null;
+    public boolean save(Payment payment) {
+        return false;
     }
 
     @Override
