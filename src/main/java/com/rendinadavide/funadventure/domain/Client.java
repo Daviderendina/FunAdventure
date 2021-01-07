@@ -18,7 +18,7 @@ public class Client {
     private String id;
     private String name;
     private String surname;
-    private Date bDate;
+    private LocalDate bDate;
 
     @OneToMany
     @JoinTable(name = "CompanionClient",
@@ -28,7 +28,7 @@ public class Client {
 
     public Client(){}
 
-    public Client(String name, String surname, Date bDate) {
+    public Client(String name, String surname, LocalDate bDate) {
         this.id = IdGenerator.getIstance().getUID();
         this.name = name;
         this.surname = surname;
@@ -56,11 +56,11 @@ public class Client {
         this.surname = surname;
     }
 
-    public Date getbDate() {
+    public LocalDate getbDate() {
         return bDate;
     }
 
-    public void setbDate(Date bDate) {
+    public void setbDate(LocalDate bDate) {
         this.bDate = bDate;
     }
 
@@ -81,8 +81,7 @@ public class Client {
     }
 
     public int calculateAge(){
-        LocalDate bDay = LocalDate.ofInstant(bDate.toInstant(), ZoneId.systemDefault());
-        return Period.between(bDay, LocalDate.now()).getYears();
+        return Period.between(bDate, LocalDate.now()).getYears();
     }
 
     public void addCompanion(Client client){
