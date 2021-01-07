@@ -23,7 +23,7 @@ public class ServiceFacade {
     }
 
 
-    public Equipment createEquipment(Date purchaseDate, String sn){
+    public Equipment createEquipment(LocalDate purchaseDate, String sn){
         return equipmentService.create(purchaseDate, sn);
     }
 

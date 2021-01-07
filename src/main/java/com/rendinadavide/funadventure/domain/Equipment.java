@@ -4,6 +4,7 @@ import com.rendinadavide.funadventure.utils.IdGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,10 +13,10 @@ public class Equipment {
 
     @Id
     private String id;
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
     private String serialNumber;
 
-    public Equipment(Date purchaseDate, String serialNumber) {
+    public Equipment(LocalDate purchaseDate, String serialNumber) {
         this.id = IdGenerator.getIstance().getUID();
         this.purchaseDate = purchaseDate;
         this.serialNumber = serialNumber;
@@ -27,11 +28,11 @@ public class Equipment {
         return id;
     }
 
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
