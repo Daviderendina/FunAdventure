@@ -37,6 +37,12 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
+    public void update(Client client) {
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+    }
+
+    @Override
     public void delete(Client client) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();

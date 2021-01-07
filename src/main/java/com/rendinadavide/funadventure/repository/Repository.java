@@ -10,7 +10,7 @@ public interface Repository<T> {
 
     List<T> findAll();
 
-    // update ?
+    void update(T t);
 
     void delete(T t);
 

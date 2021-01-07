@@ -5,6 +5,7 @@ import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.Payment;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class ServiceFacade {
         return equipmentService.create(purchaseDate, sn);
     }
 
-    public Client createClient(String name, String surname, Date bDate){
+    public Client createClient(String name, String surname, LocalDate bDate){
         return clientService.create(name, surname, bDate);
     }
 
@@ -68,7 +69,10 @@ public class ServiceFacade {
         return accessService.findClientWithActiveAccess();
     }
 
-    //update
+
+    public Client updateClient(Client client, String name, String surname, LocalDate bDate){
+        return clientService.update(client, name, surname, bDate);
+    }
 
     public void deleteClient(Client client){
         clientService.delete(client);
@@ -84,6 +88,11 @@ public class ServiceFacade {
 
     public void payAndCloseAccess(Payment payment, Access access){
         accessService.payAndCloseAccess(access, payment);
+    }
+
+
+    public void addCompanion(Client client, Client companion) {
+        clientService.addCompanion(client, companion);
     }
 
 

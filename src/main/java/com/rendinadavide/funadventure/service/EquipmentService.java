@@ -20,6 +20,16 @@ public class EquipmentService {
         return newEquip;
     }
 
+    public Equipment update(Equipment equipment, Date newDate, String newSn){
+        if(newDate.compareTo(new Date()) >= 0) return null;
+        equipment.setPurchaseDate(newDate);
+        equipment.setSerialNumber(newSn);
+
+        equipmentRepository.update(equipment);
+
+        return equipment;
+    }
+
     public Equipment findById(String equipmentId){
         return equipmentRepository.findById(equipmentId);
     }

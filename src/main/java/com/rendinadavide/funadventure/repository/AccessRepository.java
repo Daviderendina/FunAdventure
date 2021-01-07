@@ -47,8 +47,8 @@ public class AccessRepository implements Repository<Access> {
     public void update(Access access){
         em.getTransaction().begin();
         if(access.getPayment() != null) em.persist(access.getPayment());
-        Access a = em.merge(access);
-        em.flush();
+        //Access a = em.merge(access);
+        //em.flush();
         em.getTransaction().commit();
     }
 

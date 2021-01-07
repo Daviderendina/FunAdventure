@@ -37,6 +37,12 @@ public class EquipmentRepository implements Repository<Equipment> {
     }
 
     @Override
+    public void update(Equipment equipment) {
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+    }
+
+    @Override
     public void delete(Equipment equipment) {
         //TODO bool anche qui?
         em.getTransaction().begin();
