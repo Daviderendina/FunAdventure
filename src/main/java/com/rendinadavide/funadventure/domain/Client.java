@@ -6,10 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Client {
@@ -73,11 +70,23 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id) &&
+        boolean equals = Objects.equals(id, client.id) &&
                 Objects.equals(name, client.name) &&
                 Objects.equals(surname, client.surname) &&
                 Objects.equals(bDate, client.bDate) &&
-                Objects.equals(companionSet, client.companionSet);
+                companionSet.size() == client.companionSet.size();
+
+        if(equals) {
+            for (int i = 0; i < companionSet.size(); i++){
+                Client c1 = companionSet.iterator().next();
+                Client c2 = client.companionSet.iterator().next();
+                if(! c1.equals(c2))
+                    equals = false;
+            }
+            //Objects.equals(companionSet, client.companionSet);
+        }
+
+        return equals;
     }
 
     public int calculateAge(){
