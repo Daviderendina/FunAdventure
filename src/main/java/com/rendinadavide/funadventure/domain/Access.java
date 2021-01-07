@@ -10,16 +10,17 @@ import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class Access {
 
     @Id
     private String id;
-    private Date entryDate;
-    private Date exitDate;
+    private Timestamp entryDate;
+    private Timestamp exitDate;
 
     @ManyToMany
     private List<Client> clientCollection;
@@ -30,7 +31,7 @@ public class Access {
 
     public Access() {
         this.id = IdGenerator.getIstance().getUID();
-        this.entryDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.entryDate = new Timestamp(System.currentTimeMillis());
         this.clientCollection = new ArrayList<>();
         this.equipmentCollection = new ArrayList<>();
     }
@@ -39,11 +40,11 @@ public class Access {
         return id;
     }
 
-    public Date getEntryDate() {
+    public Timestamp getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(Date entryDate) {
+    public void setEntryDate(Timestamp entryDate) {
         this.entryDate = entryDate;
     }
 
@@ -71,11 +72,11 @@ public class Access {
         this.equipmentCollection.add(equipment);
     }
 
-    public void setExitDate(Date exitDate) {
+    public void setExitDate(Timestamp exitDate) {
         if(exitDate.compareTo(entryDate) > 0) this.exitDate = exitDate;
     }
 
-    public Date getExitDate() {
+    public Timestamp getExitDate() {
         return exitDate;
     }
 
@@ -85,5 +86,23 @@ public class Access {
 
     public void setEquipmentCollection(List<Equipment> equipmentCollection) {
         this.equipmentCollection = equipmentCollection;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Access access = (Access) o;
+        return Objects.equals(id, access.id) &&
+                Objects.equals(entryDate, access.entryDate) &&
+                Objects.equals(exitDate, access.exitDate) &&
+                clientCollection.containsAll(access.clientCollection) && clientCollection.size() == access.clientCollection.size() &&
+                equipmentCollection.containsAll(access.equipmentCollection) && equipmentCollection.size() == access.equipmentCollection.size() &&
+                Objects.equals(payment, access.payment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, entryDate, exitDate, clientCollection, equipmentCollection, payment);
     }
 }

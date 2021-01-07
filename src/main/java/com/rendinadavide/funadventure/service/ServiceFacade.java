@@ -74,6 +74,11 @@ public class ServiceFacade {
         return clientService.update(client, name, surname, bDate);
     }
 
+    public Equipment updateEquipment(Equipment equipment, LocalDate newPurchaseDate, String newSn){
+        return equipmentService.update(equipment, newPurchaseDate, newSn);
+    }
+
+
     public void deleteClient(Client client){
         clientService.delete(client);
     }
@@ -91,8 +96,16 @@ public class ServiceFacade {
     }
 
 
-    public void addCompanion(Client client, Client companion) {
+    public void addClientCompanion(Client client, Client companion) {
         clientService.addCompanion(client, companion);
+    }
+
+    public void addAccessClient(Access access, Client client){
+        accessService.addClient(access, client);
+    }
+
+    public void addAccessEquipment(Access access, Equipment equipment){
+        accessService.addEquipment(access, equipment);
     }
 
 

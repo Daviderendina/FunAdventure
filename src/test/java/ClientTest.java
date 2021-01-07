@@ -32,7 +32,6 @@ public class ClientTest {
 
         List<Client> clientList = em.createQuery("From Client", Client.class).getResultList();
 
-        //assertEquals(2, clientList.size());
         assertTrue(clientList.contains(client1));
         assertTrue(clientList.contains(client2));
     }
@@ -53,9 +52,9 @@ public class ClientTest {
 
     @Test
     public void testFindAll(){
-        //facade.createClient("Client", "1", getFakeDate());
-        //facade.createClient("Client", "2", getFakeDate());
-        //facade.createClient("Client", "3", getFakeDate());
+        facade.createClient("Client", "1", getFakeDate());
+        facade.createClient("Client", "2", getFakeDate());
+        facade.createClient("Client", "3", getFakeDate());
 
         List<Client> retrievedEm = facade.findAllClient();
         List<Client> retrievedDb = em.createQuery("FROM Client").getResultList();
@@ -63,26 +62,7 @@ public class ClientTest {
         retrievedDb.sort(Comparator.comparing(Client::getId));
         retrievedEm.sort(Comparator.comparing(Client::getId));
 
-        /*for(Client c: retrievedDb){
-            System.out.println(c.getId().substring(32));
-            if(c.getCompanionSet().size() != 0)
-                System.out.print(c.getCompanionSet().get(0).getId().substring(32));
-        }
-        System.out.println("--------");
-        for(Client c: retrievedEm){
-            System.out.println(c.getId().substring(32));
-            if(c.getCompanionSet().size() != 0)
-                System.out.print(c.getCompanionSet().get(0).getId().substring(32));
-        }*/
-
         assertEquals(retrievedDb, retrievedEm);
-        /*
-        Client db1 = retrievedDb.stream().filter(client -> client.getId().equals("175fe046-acd3-48cf-a11c-ea2299431f88")).collect(Collectors.toList()).get(0);
-        Client em1 = retrievedEm.stream().filter(client -> ! retrievedDb.contains(client)).collect(Collectors.toList()).get(0);
-
-        em1.getCompanionSet().equals(db1.getCompanionSet());
-        em1.getCompanionSet().iterator().next().equals(db1.getCompanionSet().iterator().next())
-* */
     }
 
     @Test
@@ -107,7 +87,7 @@ public class ClientTest {
 
         //Update companion
         Client companion = facade.createClient("Companion", "1", LocalDate.of(2000,1,1));
-        facade.addCompanion(c1, companion);
+        facade.addClientCompanion(c1, companion);
 
         retrieved = (Client) em.createQuery("From Client where id = :id")
                 .setParameter("id", c1.getId())
