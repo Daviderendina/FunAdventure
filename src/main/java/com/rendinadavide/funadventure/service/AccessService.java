@@ -20,7 +20,6 @@ public class AccessService {
 
     public Access create(List<Client> clientList, List<Equipment> equipmentList) {
 
-        //TODO vedere se funzia
         if(equipmentList != null && equipmentList.size() > 0) {
             List<Equipment> equipmentInUse = findEquipmentInUse();
             //long matchEquip = equipmentList.stream().filter(equipment -> equipmentInUse.contains(equipment)).count();

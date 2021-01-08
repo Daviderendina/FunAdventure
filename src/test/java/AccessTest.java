@@ -13,7 +13,6 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -40,7 +39,7 @@ public class AccessTest {
         assertTrue(accessList.contains(a1));
         assertTrue(accessList.contains(a2));
     }
-    
+
     @Test
     public void testFind(){
         Access a1 = createAccess();
@@ -66,6 +65,31 @@ public class AccessTest {
         retrievedEm.sort(Comparator.comparing(Access::getId));
 
         assertEquals(retrievedDb, retrievedEm);
+    }
+
+    @Test
+    public void testFindActive(){
+        List<Client> activeClients = facade.findClientWithActiveAccess();
+        List<Equipment> activeEquipment = facade.findEquipmentInUse();
+
+        Access a1 = createAccess();
+        Access a2 = createAccess();
+
+        facade.payAndCloseAccess(new CashPayment(50), a1);
+
+        List<Client> newActiveClients = facade.findClientWithActiveAccess();
+        List<Equipment> newActiveEquipment = facade.findEquipmentInUse();
+
+        activeClients.addAll(a2.getClientCollection());
+        activeEquipment.addAll(a2.getEquipmentCollection());
+
+        activeClients.sort(Comparator.comparing(Client::getId));
+        newActiveClients.sort(Comparator.comparing(Client::getId));
+        activeEquipment.sort(Comparator.comparing(Equipment::getId));
+        newActiveEquipment.sort(Comparator.comparing(Equipment::getId));
+
+        assertEquals(activeClients, newActiveClients);
+        assertEquals(activeEquipment, newActiveEquipment);
     }
 
     @Test
