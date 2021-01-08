@@ -23,13 +23,15 @@ public class AccessRepository implements Repository<Access> {
         em.getTransaction().begin();
         try {
             em.persist(access);
-            if(access.getPayment() != null) em.persist(access.getPayment());
+            if(access.getPayment() != null)
+                em.persist(access.getPayment());
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -43,25 +45,29 @@ public class AccessRepository implements Repository<Access> {
     }
 
     @Override
-    public void delete(Access access) {
+    public boolean delete(Access access) {
         em.getTransaction().begin();
         try {
             em.remove(access);
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException ex){
             em.getTransaction().rollback();
+            return false;
         }
     }
 
-    public void update(Access access){
+    public boolean update(Access access){
         em.getTransaction().begin();
         try {
             if (access.getPayment() != null) em.persist(access.getPayment());
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException ex){
             em.getTransaction().rollback();
+            return false;
         }
     }
 

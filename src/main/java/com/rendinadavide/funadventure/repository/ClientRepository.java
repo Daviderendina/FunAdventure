@@ -24,11 +24,12 @@ public class ClientRepository implements Repository<Client> {
         try {
             em.persist(client);
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -42,26 +43,30 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
-    public void update(Client client) {
+    public boolean update(Client client) {
         em.getTransaction().begin();
         try {
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
-    public void delete(Client client) {
+    public boolean delete(Client client) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
             em.remove(client);
             tx.commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
     }
 }

@@ -24,11 +24,12 @@ public class EquipmentRepository implements Repository<Equipment> {
         try {
             em.persist(equipment);
             tx.commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -42,26 +43,29 @@ public class EquipmentRepository implements Repository<Equipment> {
     }
 
     @Override
-    public void update(Equipment equipment) {
+    public boolean update(Equipment equipment) {
         em.getTransaction().begin();
         try {
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
-    public void delete(Equipment equipment) {
-        //TODO bool anche qui?
+    public boolean delete(Equipment equipment) {
         em.getTransaction().begin();
         try {
             em.remove(equipment);
             em.getTransaction().commit();
+            return true;
 
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
+            return false;
         }
     }
 }
