@@ -21,8 +21,13 @@ public class EquipmentRepository implements Repository<Equipment> {
     public boolean save(Equipment equipment) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.persist(equipment);
-        tx.commit();
+        try {
+            em.persist(equipment);
+            tx.commit();
+
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+        }
         return true;
     }
 
@@ -39,14 +44,24 @@ public class EquipmentRepository implements Repository<Equipment> {
     @Override
     public void update(Equipment equipment) {
         em.getTransaction().begin();
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().commit();
+
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+        }
     }
 
     @Override
     public void delete(Equipment equipment) {
         //TODO bool anche qui?
         em.getTransaction().begin();
-        em.remove(equipment);
-        em.getTransaction().commit();
+        try {
+            em.remove(equipment);
+            em.getTransaction().commit();
+
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+        }
     }
 }

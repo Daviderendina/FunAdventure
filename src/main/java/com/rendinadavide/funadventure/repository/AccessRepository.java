@@ -21,9 +21,14 @@ public class AccessRepository implements Repository<Access> {
     @Override
     public boolean save(Access access) {
         em.getTransaction().begin();
-        em.persist(access);
-        if(access.getPayment() != null) em.persist(access.getPayment());
-        em.getTransaction().commit();
+        try {
+            em.persist(access);
+            if(access.getPayment() != null) em.persist(access.getPayment());
+            em.getTransaction().commit();
+
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+        }
         return true;
     }
 
@@ -40,16 +45,24 @@ public class AccessRepository implements Repository<Access> {
     @Override
     public void delete(Access access) {
         em.getTransaction().begin();
-        em.remove(access);
-        em.getTransaction().commit();
+        try {
+            em.remove(access);
+            em.getTransaction().commit();
+
+        } catch (RuntimeException ex){
+            em.getTransaction().rollback();
+        }
     }
 
     public void update(Access access){
         em.getTransaction().begin();
-        if(access.getPayment() != null) em.persist(access.getPayment());
-        //Access a = em.merge(access);
-        //em.flush();
-        em.getTransaction().commit();
+        try {
+            if (access.getPayment() != null) em.persist(access.getPayment());
+            em.getTransaction().commit();
+
+        } catch (RuntimeException ex){
+            em.getTransaction().rollback();
+        }
     }
 
     public List<Equipment> findEquipmentInUse(){
