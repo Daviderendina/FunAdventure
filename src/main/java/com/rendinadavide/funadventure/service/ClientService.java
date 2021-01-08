@@ -4,7 +4,6 @@ import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.repository.ClientRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class ClientService {

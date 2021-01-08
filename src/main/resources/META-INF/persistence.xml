@@ -10,14 +10,10 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
-            <!-- Connection settings -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/funadventure?createDatabaseIfNotExist=true"/>
-            <property name="hibernate.connection.username" value="root"/> <!-- TODO cambiare user?-->
-            <property name="hibernate.connection.password" value="du*PImH:e36,"/>
-            <property name="hibernate.allow_update_outside_transaction" value="true"/>
-            <!-- SQL dialect -->
-            <!-- Print executed SQL to stdout -->
+            <property name="hibernate.connection.username" value="funadventure"/>
+            <property name="hibernate.connection.password" value="QYqJcfgMh3#v"/>
             <property name="show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value = "update"/>
             <property name="hibernate.naming.physical-strategy" value="org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"/>

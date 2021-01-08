@@ -4,7 +4,6 @@ import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.repository.EquipmentRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class EquipmentService {
