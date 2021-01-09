@@ -15,11 +15,13 @@ public class ServiceFacade {
     EquipmentService equipmentService;
     ClientService clientService;
     AccessService accessService;
+    PaymentService paymentService;
 
     public ServiceFacade(){
         equipmentService = new EquipmentService();
         clientService = new ClientService();
         accessService = new AccessService();
+        paymentService = new PaymentService();
     }
 
 
@@ -48,6 +50,8 @@ public class ServiceFacade {
         return equipmentService.findById(Id);
     }
 
+    public Payment findPaymentById(String Id){ return paymentService.findById(Id);}
+
 
     public List<Client> findAllClient(){
         return clientService.findAll();
@@ -60,6 +64,8 @@ public class ServiceFacade {
     public List<Equipment> findAllEquipment(){
         return equipmentService.findAll();
     }
+
+    public List<Payment> findAllPayment(){return paymentService.findAll();}
 
     public List<Equipment> findEquipmentInUse(){
         return accessService.findEquipmentInUse();

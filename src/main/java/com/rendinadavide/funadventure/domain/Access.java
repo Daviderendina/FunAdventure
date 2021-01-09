@@ -2,6 +2,8 @@ package com.rendinadavide.funadventure.domain;
 
 import com.rendinadavide.funadventure.domain.payment.Payment;
 import com.rendinadavide.funadventure.utils.IdGenerator;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +29,7 @@ public class Access {
     @ManyToMany
     private List<Equipment> equipmentCollection;
     @OneToOne
+    @Cascade(CascadeType.PERSIST)
     private Payment payment;
 
     public Access() {

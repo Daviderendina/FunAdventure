@@ -23,8 +23,6 @@ public class AccessRepository implements Repository<Access> {
         em.getTransaction().begin();
         try {
             em.persist(access);
-            if(access.getPayment() != null)
-                em.persist(access.getPayment());
             em.getTransaction().commit();
             return true;
 
@@ -61,7 +59,6 @@ public class AccessRepository implements Repository<Access> {
     public boolean update(Access access){
         em.getTransaction().begin();
         try {
-            if (access.getPayment() != null) em.persist(access.getPayment());
             em.getTransaction().commit();
             return true;
 
