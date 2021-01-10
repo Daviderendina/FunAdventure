@@ -34,15 +34,15 @@ Ogni classe ha un attributo di tipo integer chiamato id, che rappresenta il UID 
 Rappresenta un cliente registrato nel sistema del parco avventura, descritto dai suoi dati anagrafici (nome, cognome, data di nascita). Un *Client* può essere in relazione con altri n *Client* (*accompanied_by*); questa relazione indica che il cliente dalla parte n della relazione è il maggiorenne accompagnatore (*companion*) dell'altro.
 
 #### Relazione: park_access
-Mette in relazione un accesso al parco con i *Client* che l'hanno effettuato. In particolare la relazione è di cardinalità n:n poichè ad un unico accesso al parco possono essere collegati più clienti (ad esempio per i gruppi) mentre un'unico cliente può essere presente in diversi ingressi (ad esempio, in giornate diverse).
+Mette in relazione un accesso al parco con i *Client* che l'hanno effettuato. In particolare la relazione è di cardinalità n:n poiché ad un unico accesso al parco possono essere collegati più clienti (ad esempio per i gruppi) mentre un unico cliente può essere presente in diversi ingressi (ad esempio, in giornate diverse).
 
-#### Entrance
+#### Access
 Questa entità rappresenta un singolo ingresso che viene effettuato al parco. Un *Access* viene definito solamente da due timestamp relativi alla creazione dell'ingresso (entrata dei clienti nel parco) e alla chiusura e pagamento dello stesso (uscita di tutti i clienti dal parco).
-Un *Access* è in relazione con un *Payment* (con cardinalità 1 - 0..1) che rappresenta il pagamento effettuato per lo specifico ingresso; il pagamento è definito con relazione 0 poichè avviene in un momento successivo alla creazione dell'ingresso. Presenta anche le relazioni *park_access* e *equipment_used* con rispettivamente i clienti e l'equipaggiamento dell'accesso.
+Un *Access* è in relazione con un *Payment* (con cardinalità 1 - 0..1) che rappresenta il pagamento effettuato per lo specifico ingresso; il pagamento è definito con relazione 0 poiché avviene in un momento successivo alla creazione dell'ingresso. Presenta anche le relazioni *park_access* e *equipment_used* con rispettivamente i clienti e l'equipaggiamento dell'accesso.
 La classe *Access* contiene quindi le due collezioni relative alle relazioni della classe *Access* con *Equipment* (relazione *equipment_used*) e *Client* (relazione *park_access*).
 
 #### Relazione: equipment_used
-Relazione con cardinalità n:m che mette in relazione un *Access* con tutti gli *Equipment* che sono stati utilizzati in quell'accesso. La cardinalità è n:m poichè in un *Access* potrebbero esserci diversi *Equipment* utilizzati (ad esempio, da clienti diversi) e allo stesso tempo un *Equipment* può essere in relazione con diversi *Access* (in giorni diversi).
+Relazione con cardinalità n:m che mette in relazione un *Access* con tutti gli *Equipment* che sono stati utilizzati in quell'accesso. La cardinalità è n:m poiché in un *Access* potrebbero esserci diversi *Equipment* utilizzati (ad esempio, da clienti diversi) e allo stesso tempo un *Equipment* può essere in relazione con diversi *Access* (in giorni diversi).
 
 #### Equipment
 Rappresenta un singolo equipaggiamento (es. casco, imbrago, ..) in possesso del parco avventura. È descritto dalla sua data di acquisto e dal numero seriale.
@@ -75,6 +75,10 @@ Ogni entità è stata mappata attraverso le annotazioni JPA con una tabella del 
 ### Service
 Questo package rappresenta lo strato di Service dell'applicazione, contenente tutta la logica di businness del sistema. Per ogni entità (*Client*, *Access*, *Equipment* e *Payment*) è presente un Service, che implementa la logica di businness e successivamente comunica con lo strato di *Repository* per persistere le operazioni sul db. In particolare, ogni Service contiene un oggetto Repository corrispondente per delegare le varie operazioni.
 Al fine di facilitare l'accesso ai servizi forniti da questo strato, è presente una *ServiceFacade* che ha il compito di esporre la API per utilizzare lo strato.
+
+Per *PaymentService*, è stato definito un comportamento diverso dalle altre entità. Anche se *PaymentRepository* implementa tutte le operazioni CRUD, il Service utilizza solamente le funzioni di ricerca (find), poiché un *Payment* è strettamente legato al suo *Access* di riferimento. Per questo motivo, il campo *Payment* della classe *Access* è stato annotato con @Cascade(CascadeType.ALL), in modo che ogni operazione CRUD effettuata sull'*Access* venga applicata anche sul *Payment*.
+
+Questo strato del sistema contiene anche la classe *PaymentFactory*, una Factory che si occupa di creare un oggetto di tipo Payment.
 
 ### Repository
 Questo package rappresenta lo strato di Repository dell'applicazione, che ha lo scopo di interfacciarsi con il database per effettuare le operazioni CRUD sulle entità; per ogni entità (*Client*, *Access*, *Equipment* e *Payment*) è presente una diversa repository. Ogni repository implementa un'interfaccia *Repository*, che ha il compito di uniformare le API di accesso al db per tutte le istanze.

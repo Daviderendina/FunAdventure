@@ -29,7 +29,7 @@ public class Access {
     @ManyToMany
     private List<Equipment> equipmentCollection;
     @OneToOne
-    @Cascade(CascadeType.PERSIST)
+    @Cascade(CascadeType.ALL)
     private Payment payment;
 
     public Access() {
