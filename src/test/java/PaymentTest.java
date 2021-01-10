@@ -4,6 +4,7 @@ import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.CashPayment;
 import com.rendinadavide.funadventure.domain.payment.Payment;
+import com.rendinadavide.funadventure.domain.payment.PaymentType;
 import com.rendinadavide.funadventure.service.ServiceFacade;
 import org.junit.After;
 import org.junit.Before;
@@ -70,7 +71,7 @@ public class PaymentTest {
         Client client2 = facade.createClient("Client", "1", LocalDate.of(2010,1,1));
         Equipment equipment2 = facade.createEquipment(LocalDate.of(2020,1,1), "");
         Access access = facade.createAccess(new ArrayList<>(List.of(client1, client2)), new ArrayList<>(List.of(equipment1, equipment2)));
-        facade.payAndCloseAccess(new CashPayment(50), access);
+        facade.payAndCloseAccess(access, 50, PaymentType.CASH);
         return access;
     }
 }

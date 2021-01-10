@@ -4,6 +4,7 @@ import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.Payment;
+import com.rendinadavide.funadventure.domain.payment.PaymentType;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -75,6 +76,8 @@ public class ServiceFacade {
         return accessService.findClientWithActiveAccess();
     }
 
+    public List<Client> findClientWithFreeAccess(){ return accessService.findClientWithFreeAccess();}
+
 
     public Client updateClient(Client client, String name, String surname, LocalDate bDate){
         return clientService.update(client, name, surname, bDate);
@@ -97,8 +100,12 @@ public class ServiceFacade {
         accessService.delete(access);
     }
 
-    public void payAndCloseAccess(Payment payment, Access access){
-        accessService.payAndCloseAccess(access, payment);
+    public void payAndCloseAccess(Access access, float amount, String str, PaymentType type){
+        accessService.payAndCloseAccess(access, amount, str, type);
+    }
+
+    public void payAndCloseAccess(Access access, float amount, PaymentType type){
+        accessService.payAndCloseAccess(access, amount, type);
     }
 
 
