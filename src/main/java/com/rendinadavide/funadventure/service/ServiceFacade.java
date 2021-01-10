@@ -76,6 +76,8 @@ public class ServiceFacade {
         return accessService.findClientWithActiveAccess();
     }
 
+    public List<Client> findClientWithFreeAccess(){ return accessService.findClientWithFreeAccess();}
+
 
     public Client updateClient(Client client, String name, String surname, LocalDate bDate){
         return clientService.update(client, name, surname, bDate);

@@ -96,5 +96,6 @@ public class AccessService {
         return accessRepository.findClientWithActiveAccess();
     }
 
+    public List<Client> findClientWithFreeAccess(){ return accessRepository.findClientFreeAccess(); }
 
 }

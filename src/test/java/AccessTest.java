@@ -94,6 +94,24 @@ public class AccessTest {
     }
 
     @Test
+    public void testSearchClientFreeAccess(){
+        List<Client> clientFreeAccessStart = facade.findClientWithFreeAccess();
+
+        Access a1 = createAccess();
+        Access a2 = createAccess();
+
+        facade.payAndCloseAccess(a1, 50, "", PaymentType.CASH);
+        facade.payAndCloseAccess(a2, 0, "", PaymentType.CASH);
+
+        List<Client> clientFreeAccess = facade.findClientWithFreeAccess();
+        List<Client> clientFreeAccessQuery = em.createQuery("Select c from Access a join a.clientCollection c join a.payment p where p.amount = 0").getResultList();
+
+        assertEquals(clientFreeAccessStart.size() + 2, clientFreeAccess.size());
+        assertEquals(clientFreeAccess, clientFreeAccessQuery);
+        assertTrue(clientFreeAccess.containsAll(a2.getClientCollection()));
+    }
+
+    @Test
     public void testUpdate(){
         Access access = createAccess();
 
@@ -126,6 +144,7 @@ public class AccessTest {
         int accNumber = em.createQuery("From Access").getResultList().size();
 
         facade.deleteAccess(a1);
+        facade.payAndCloseAccess(a1, 50, "", PaymentType.CASH);
 
         int accNumberDeleted = em.createQuery("From Access").getResultList().size();
 
