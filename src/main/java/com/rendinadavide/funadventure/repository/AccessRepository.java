@@ -75,4 +75,8 @@ public class AccessRepository implements Repository<Access> {
     public List<Client> findClientWithActiveAccess(){
         return em.createQuery("Select c from Access a join a.clientCollection c where exitDate is null").getResultList();
     }
+
+    public List<Client> findClientFreeAccess(){
+        return em.createQuery("Select c from Access a join a.clientCollection c join a.payment p where p.amount < 0").getResultList();
+    }
 }
