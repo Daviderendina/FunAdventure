@@ -24,7 +24,7 @@ Per testare il progetto, sono stati implementati appositi test unitari attravers
 - _cd 2020_assignment3_meet_your_friends_
 - _mvn test_
 
-Nota bene: per eseguire il progetto, è necessario che l'istanza di MySql sia in ascolto su localhost:3306. Per lanciare il servizio, è necessario utilizzare i comandi specificati al seguente [link](https://tableplus.com/blog/2018/10/how-to-start-stop-restart-mysql-server.html)
+Nota bene: per eseguire il progetto, è necessario che l'istanza di MySql sia in ascolto su localhost:3306. Per lanciare il servizio, è necessario installare MySql e, se necessario, utilizzare i comandi specificati al seguente [link](https://tableplus.com/blog/2018/10/how-to-start-stop-restart-mysql-server.html)
 
 
 ## Diagramma di dominio
