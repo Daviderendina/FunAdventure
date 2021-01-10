@@ -2,6 +2,7 @@ import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.CashPayment;
+import com.rendinadavide.funadventure.domain.payment.PaymentType;
 import com.rendinadavide.funadventure.service.ServiceFacade;
 import org.junit.After;
 import org.junit.Before;
@@ -75,7 +76,7 @@ public class AccessTest {
         Access a1 = createAccess();
         Access a2 = createAccess();
 
-        facade.payAndCloseAccess(new CashPayment(50), a1);
+        facade.payAndCloseAccess(a1, 50, PaymentType.CASH);
 
         List<Client> newActiveClients = facade.findClientWithActiveAccess();
         List<Equipment> newActiveEquipment = facade.findEquipmentInUse();
@@ -104,7 +105,8 @@ public class AccessTest {
 
         facade.addAccessClient(access, c1);
         facade.addAccessEquipment(access, e1);
-        facade.payAndCloseAccess(new CashPayment(50), access);
+        facade.payAndCloseAccess(access, 50, PaymentType.CASH);
+
 
         Access retrieved = em.createQuery("From Access where id = :id", Access.class)
                 .setParameter("id", access.getId())

@@ -4,6 +4,7 @@ import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.Payment;
+import com.rendinadavide.funadventure.domain.payment.PaymentType;
 import com.rendinadavide.funadventure.repository.AccessRepository;
 
 import java.sql.Timestamp;
@@ -71,16 +72,20 @@ public class AccessService {
         }
     }
 
-    public boolean payAndCloseAccess(Access access, Payment payment){
-        if(payment.getAmount() < 0) return false;
-        //if(paymentRepository.findById(payment.getId()) != null) return false;
+    public boolean payAndCloseAccess(Access access, float amount, PaymentType type){
+        return payAndCloseAccess(access, amount, "", type);
+    }
+
+    public boolean payAndCloseAccess(Access access, float amount, String str, PaymentType type){
+        Payment payment = PaymentFactory.getPayment(amount, str, type);
+
+        if(payment == null) return false;
         if(access.getPayment() != null) return false;
 
         access.setPayment(payment);
         access.setExitDate(new Timestamp(System.currentTimeMillis()));
-        accessRepository.update(access);
 
-        return true;
+        return accessRepository.update(access);
     }
 
     public List<Equipment> findEquipmentInUse(){
