@@ -22,16 +22,18 @@ Rappresenta un cliente registrato nel sistema del parco avventura, descritto dai
 Mette in relazione un accesso al parco con i *Client* che l'hanno effettuato. In particolare la relazione è di cardinalità n:n poichè ad un unico accesso al parco possono essere collegati più clienti (ad esempio per i gruppi) mentre un'unico cliente può essere presente in diversi ingressi (ad esempio, in giornate diverse).
 
 #### Entrance
-Questa entità rappresenta un singolo ingresso che viene effettuato al parco. Un *Entrance* viene definita solamente dai due timestamp di creazione dell'ingresso (entrata dei clienti nel parco) e di chiusura e pagamento dello stesso (uscita di tutti i clienti dal parco).
-Un *Entrance* è in relazione con un pagamento (con cardinalità 1 - 0..1) che rappresenta il pagamento effettuato per lo specifico ingresso; il pagamento è definito con relazione 0 poichè avviene in un momento successivo alla creazione dell'ingresso. 
-<!-- Un ingresso inoltre contiene due insiemi rispettivamente di clienti (che rappresenta appunto il cliente singolo/gruppo che accede al parco) e di attrezzatura, rappresentante tutte le tipologie di attrezzatura (caschi, imbraghi) utilizzati dai clienti di quella *Entrance*. -->
+Questa entità rappresenta un singolo ingresso che viene effettuato al parco. Un *Access* viene definito solamente da due timestamp relativi alla creazione dell'ingresso (entrata dei clienti nel parco) e alla chiusura e pagamento dello stesso (uscita di tutti i clienti dal parco).
+Un *Access* è in relazione con un *Payment* (con cardinalità 1 - 0..1) che rappresenta il pagamento effettuato per lo specifico ingresso; il pagamento è definito con relazione 0 poichè avviene in un momento successivo alla creazione dell'ingresso. Presenta anche le relazioni *park_access* e *equipment_used* con rispettivamente i clienti e l'equipaggiamento dell'accesso. 
+La classe *Access* contiene quindi le due collezioni relative alle relazioni della classe *Access* con *Equipment* (relazione *equipment_used*) e *Client* (relazione *park_access*).
+
+#### Relazione: equipment_used
+Relazione con cardinalità n:m che mette in relazione un *Access* con tutti gli *Equipment* che sono stati utilizzati in quell'accesso. La cardinalità è n:m poichè in un *Access* potrebbero esserci diversi *Equipment* utilizzati (ad esempio, da clienti diversi) e allo stesso tempo un *Equipment* può essere in relazione con diversi *Access* (in giorni diversi).
 
 #### Equipment
-Rappresenta un singolo equipaggiamento (casco, imbrago, ..) in possesso del parco avventura. È descritto dalla sua data di acquisto e
-dal numero seriale.
+Rappresenta un singolo equipaggiamento (es. casco, imbrago, ..) in possesso del parco avventura. È descritto dalla sua data di acquisto e dal numero seriale.
 
 #### Payment
-Descrive il pagamento effettuato dal/dai clienti nei confronti del parco al termine della loro visita. È descritto da un campo float *amount*, che rappresenta il conto saldato, e dalla data e ora del pagamento. *Payment* è una generalizzazione di tre diverse entità: *Voucher*, *CreditCard* e *Cash*.
+Descrive il pagamento effettuato dai clienti nei confronti del parco al termine della loro visita. È descritto da un campo float *amount*, che rappresenta il conto saldato, e dalla data e ora del pagamento. *Payment* è una generalizzazione di tre diverse entità, che rappresentano i diversi tipi di pagamento possibili: *Voucher*, *CreditCard* e *Cash*.
 
 #### Voucher
 Rappresenta il pagamento effettuato tramite voucher dal cliente. Un pagamento di questo tipo è descritto anche dal numero seriale del voucher utilizzato dal cliente.
