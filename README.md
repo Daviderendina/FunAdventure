@@ -19,7 +19,10 @@ Al fine di funzionare correttamente, deve essere presente un istanza di MySql co
 - Presenza di un utente con username "funadventure" e password "QYqJcfgMh3#v"
 
 ### Run del progetto
-Per testare il progetto, sono stati implementati appositi test unitari attraverso JUnit. Per eseguirli, è necessario eseguire il comando _mvn test_ dall'interno della directory del progetto.
+Per testare il progetto, sono stati implementati appositi test unitari attraverso JUnit. Per eseguirli, è necessario eseguire i seguenti comandi:
+- _git clone https://gitlab.com/daviderendina/2020_assignment3_meet_your_friends.git_
+- _cd 2020_assignment3_meet_your_friends_
+- _mvn test_
 
 
 ## Diagramma di dominio
@@ -33,8 +36,9 @@ Ogni classe ha un attributo di tipo integer chiamato id, che rappresenta il UID 
 #### Client
 Rappresenta un cliente registrato nel sistema del parco avventura, descritto dai suoi dati anagrafici (nome, cognome, data di nascita). Un *Client* può essere in relazione con altri n *Client* (*accompanied_by*); questa relazione indica che il cliente dalla parte n della relazione è il maggiorenne accompagnatore (*companion*) dell'altro.
 
-#### Relazione: park_access
+#### Relazione: park_access
 Mette in relazione un accesso al parco con i *Client* che l'hanno effettuato. In particolare la relazione è di cardinalità n:n poiché ad un unico accesso al parco possono essere collegati più clienti (ad esempio per i gruppi) mentre un unico cliente può essere presente in diversi ingressi (ad esempio, in giornate diverse).
+
 
 #### Access
 Questa entità rappresenta un singolo ingresso che viene effettuato al parco. Un *Access* viene definito solamente da due timestamp relativi alla creazione dell'ingresso (entrata dei clienti nel parco) e alla chiusura e pagamento dello stesso (uscita di tutti i clienti dal parco).
