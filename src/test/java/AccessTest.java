@@ -165,7 +165,16 @@ public class AccessTest {
         Equipment equipment1 = facade.createEquipment(LocalDate.of(2020,1,1), "");
         Client client2 = facade.createClient("Client", "1", getFakeDate());
         Equipment equipment2 = facade.createEquipment(LocalDate.of(2020,1,1), "");
-        return facade.createAccess(new ArrayList<>(List.of(client1, client2)), new ArrayList<>(List.of(equipment1, equipment2)));
+
+        List<Client> clientList = new ArrayList<>();
+        clientList.add(client1);
+        clientList.add(client2);
+
+        List<Equipment> equipmentList = new ArrayList<>();
+        equipmentList.add(equipment1);
+        equipmentList.add(equipment2);
+
+        return facade.createAccess(clientList, equipmentList);
     }
 
 }

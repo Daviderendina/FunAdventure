@@ -16,6 +16,7 @@ import javax.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -70,7 +71,16 @@ public class PaymentTest {
         Equipment equipment1 = facade.createEquipment(LocalDate.of(2020,1,1), "");
         Client client2 = facade.createClient("Client", "1", LocalDate.of(2010,1,1));
         Equipment equipment2 = facade.createEquipment(LocalDate.of(2020,1,1), "");
-        Access access = facade.createAccess(new ArrayList<>(List.of(client1, client2)), new ArrayList<>(List.of(equipment1, equipment2)));
+
+        List<Client> clientList = new ArrayList<>();
+        clientList.add(client1);
+        clientList.add(client2);
+
+        List<Equipment> equipmentList = new ArrayList<>();
+        equipmentList.add(equipment1);
+        equipmentList.add(equipment2);
+
+        Access access = facade.createAccess(clientList, equipmentList);
         facade.payAndCloseAccess(access, 50, PaymentType.CASH);
         return access;
     }
