@@ -27,8 +27,8 @@ public class ClientTest {
 
     @Test
     public void testCreate(){
-        Client client1 = facade.createClient("Client", "1", getFakeDate());
-        Client client2 = facade.createClient("Client", "2", getFakeDate());
+        Client client1 = facade.createClient("Client", "1", TestUtils.getFakeDate());
+        Client client2 = facade.createClient("Client", "2", TestUtils.getFakeDate());
 
         List<Client> clientList = em.createQuery("From Client", Client.class).getResultList();
 
@@ -38,7 +38,7 @@ public class ClientTest {
 
     @Test
     public void testFind(){
-        Client client1 = facade.createClient("Client", "1", getFakeDate());
+        Client client1 = facade.createClient("Client", "1", TestUtils.getFakeDate());
 
         Client retrievedEm = facade.findClientById(client1.getId());
 
@@ -52,9 +52,9 @@ public class ClientTest {
 
     @Test
     public void testFindAll(){
-        facade.createClient("Client", "1", getFakeDate());
-        facade.createClient("Client", "2", getFakeDate());
-        facade.createClient("Client", "3", getFakeDate());
+        facade.createClient("Client", "1", TestUtils.getFakeDate());
+        facade.createClient("Client", "2", TestUtils.getFakeDate());
+        facade.createClient("Client", "3", TestUtils.getFakeDate());
 
         List<Client> retrievedEm = facade.findAllClient();
         List<Client> retrievedDb = em.createQuery("FROM Client").getResultList();
@@ -67,13 +67,13 @@ public class ClientTest {
 
     @Test
     public void testUpdate(){
-        Client c1 = facade.createClient("Client","1", getFakeDate());
+        Client c1 = facade.createClient("Client","1", TestUtils.getFakeDate());
 
 
         //Update fields
         String newName = "NewClient";
         String newSurname = "New1";
-        facade.updateClient(c1, newName, newSurname, getFakeDate());
+        facade.updateClient(c1, newName, newSurname, TestUtils.getFakeDate());
 
         Client retrieved = (Client) em.createQuery("From Client where id = :id")
                 .setParameter("id", c1.getId())
@@ -98,8 +98,8 @@ public class ClientTest {
 
     @Test
     public void testDelete(){
-        Client c1 = facade.createClient("","",getFakeDate());
-        Client c2 = facade.createClient("","",getFakeDate());
+        Client c1 = facade.createClient("","", TestUtils.getFakeDate());
+        Client c2 = facade.createClient("","", TestUtils.getFakeDate());
 
         int cliNumber = em.createQuery("From Client").getResultList().size();
 
@@ -116,8 +116,5 @@ public class ClientTest {
         em.close();
     }
 
-    private LocalDate getFakeDate(){
-        return LocalDate.of(2010,1,1);
-    }
 
 }

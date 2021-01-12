@@ -27,8 +27,8 @@ public class EquipmentTest {
 
     @Test
     public void testCreate(){
-        Equipment equipment1 = facade.createEquipment(getFakeDate(), "");
-        Equipment equipment2 = facade.createEquipment(getFakeDate(), "");
+        Equipment equipment1 = facade.createEquipment(TestUtils.getFakeDate(), "");
+        Equipment equipment2 = facade.createEquipment(TestUtils.getFakeDate(), "");
 
         List<Equipment> equipmentList = em.createQuery("From Equipment").getResultList();
 
@@ -38,7 +38,7 @@ public class EquipmentTest {
 
     @Test
     public void testFind(){
-        Equipment equipment1 = facade.createEquipment(getFakeDate(), "");
+        Equipment equipment1 = facade.createEquipment(TestUtils.getFakeDate(), "");
 
         Equipment retrievedEm = facade.findEquipmentById(equipment1.getId());
         Equipment retrievedDb = em.createQuery("FROM Equipment where id = :id", Equipment.class)
@@ -51,9 +51,9 @@ public class EquipmentTest {
 
     @Test
     public void testFindAll(){
-        facade.createEquipment(getFakeDate(), "");
-        facade.createEquipment(getFakeDate(), "");
-        facade.createEquipment(getFakeDate(), "");
+        facade.createEquipment(TestUtils.getFakeDate(), "");
+        facade.createEquipment(TestUtils.getFakeDate(), "");
+        facade.createEquipment(TestUtils.getFakeDate(), "");
 
         List<Equipment> retrievedEm = facade.findAllEquipment();
         List<Equipment> retrievedDb = em.createQuery("FROM Equipment", Equipment.class).getResultList();
@@ -66,8 +66,8 @@ public class EquipmentTest {
 
     @Test
     public void testDelete(){
-        Equipment eq1 = facade.createEquipment(getFakeDate(), "");
-        Equipment eq2 = facade.createEquipment(getFakeDate(), "");
+        Equipment eq1 = facade.createEquipment(TestUtils.getFakeDate(), "");
+        Equipment eq2 = facade.createEquipment(TestUtils.getFakeDate(), "");
 
         int eqNumber = em.createQuery("From Equipment").getResultList().size();
 
@@ -81,7 +81,7 @@ public class EquipmentTest {
 
     @Test
     public void testUpdate(){
-        Equipment e1 = facade.createEquipment(getFakeDate(), "");
+        Equipment e1 = facade.createEquipment(TestUtils.getFakeDate(), "");
 
         String newSn = "NewSn";
         facade.updateEquipment(e1, e1.getPurchaseDate(), newSn);
@@ -99,7 +99,4 @@ public class EquipmentTest {
         em.close();
     }
 
-    private LocalDate getFakeDate(){
-        return LocalDate.of(2010,1,1);
-    }
 }

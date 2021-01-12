@@ -1,7 +1,6 @@
 import com.rendinadavide.funadventure.domain.Access;
 import com.rendinadavide.funadventure.domain.Client;
 import com.rendinadavide.funadventure.domain.Equipment;
-import com.rendinadavide.funadventure.domain.payment.CashPayment;
 import com.rendinadavide.funadventure.domain.payment.PaymentType;
 import com.rendinadavide.funadventure.service.ServiceFacade;
 import org.junit.After;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,7 +31,7 @@ public class AccessTest {
     @Test
     public void testCreate(){
         Access a1 = facade.createAccess(new ArrayList<>(),new ArrayList<>());
-        Access a2 = createAccess();
+        Access a2 = TestUtils.createAccess(facade);
 
         List<Access> accessList = em.createQuery("From Access", Access.class).getResultList();
 
@@ -43,7 +41,7 @@ public class AccessTest {
 
     @Test
     public void testFind(){
-        Access a1 = createAccess();
+        Access a1 = TestUtils.createAccess(facade);
 
         Access retrievedEm = facade.findAccessById(a1.getId());
         Access retrievedDb = em.createQuery("FROM Access where id = :id", Access.class)
@@ -56,8 +54,8 @@ public class AccessTest {
 
     @Test
     public void testFindAll(){
-        createAccess();
-        createAccess();
+        TestUtils.createAccess(facade);
+        TestUtils.createAccess(facade);
 
         List<Access> retrievedEm = facade.findAllAccess();
         List<Access> retrievedDb = em.createQuery("FROM Access", Access.class).getResultList();
@@ -73,8 +71,8 @@ public class AccessTest {
         List<Client> activeClients = facade.findClientWithActiveAccess();
         List<Equipment> activeEquipment = facade.findEquipmentInUse();
 
-        Access a1 = createAccess();
-        Access a2 = createAccess();
+        Access a1 = TestUtils.createAccess(facade);
+        Access a2 = TestUtils.createAccess(facade);
 
         facade.payAndCloseAccess(a1, 50, PaymentType.CASH);
 
@@ -97,8 +95,8 @@ public class AccessTest {
     public void testSearchClientFreeAccess(){
         List<Client> clientFreeAccessStart = facade.findClientWithFreeAccess();
 
-        Access a1 = createAccess();
-        Access a2 = createAccess();
+        Access a1 = TestUtils.createAccess(facade);
+        Access a2 = TestUtils.createAccess(facade);
 
         facade.payAndCloseAccess(a1, 50, "", PaymentType.CASH);
         facade.payAndCloseAccess(a2, 0, "", PaymentType.CASH);
@@ -113,13 +111,13 @@ public class AccessTest {
 
     @Test
     public void testUpdate(){
-        Access access = createAccess();
+        Access access = TestUtils.createAccess(facade);
 
         int clientNum = access.getClientCollection().size();
         int equipNum = access.getEquipmentCollection().size();
 
-        Client c1 = facade.createClient("Client","1", getFakeDate());
-        Equipment e1 = facade.createEquipment(getFakeDate(), "");
+        Client c1 = facade.createClient("Client","1", TestUtils.getFakeDate());
+        Equipment e1 = facade.createEquipment(TestUtils.getFakeDate(), "");
 
         facade.addAccessClient(access, c1);
         facade.addAccessEquipment(access, e1);
@@ -139,7 +137,7 @@ public class AccessTest {
 
     @Test
     public void testDelete(){
-        Access a1 = createAccess();
+        Access a1 = TestUtils.createAccess(facade);
 
         int accNumber = em.createQuery("From Access").getResultList().size();
 
@@ -156,25 +154,7 @@ public class AccessTest {
         em.close();
     }
 
-    private LocalDate getFakeDate(){
-        return LocalDate.of(2010,1,1);
-    }
 
-    private Access createAccess(){
-        Client client1 = facade.createClient("Client", "1", getFakeDate());
-        Equipment equipment1 = facade.createEquipment(LocalDate.of(2020,1,1), "");
-        Client client2 = facade.createClient("Client", "1", getFakeDate());
-        Equipment equipment2 = facade.createEquipment(LocalDate.of(2020,1,1), "");
 
-        List<Client> clientList = new ArrayList<>();
-        clientList.add(client1);
-        clientList.add(client2);
-
-        List<Equipment> equipmentList = new ArrayList<>();
-        equipmentList.add(equipment1);
-        equipmentList.add(equipment2);
-
-        return facade.createAccess(clientList, equipmentList);
-    }
 
 }
