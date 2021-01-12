@@ -1,3 +1,3 @@
 package com.rendinadavide.funadventure.domain.payment;
 
-public enum PaymentType{CASH, VOUCHER, CARD}
+public enum PaymentType{CASH, CARD, VOUCHER}

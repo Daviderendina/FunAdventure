@@ -5,15 +5,13 @@ import com.rendinadavide.funadventure.domain.Client;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class ClientRepository implements Repository<Client> {
 
     private EntityManager em;
 
-    public ClientRepository(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
+    public ClientRepository(EntityManagerFactory emf){
         em = emf.createEntityManager();
     }
 

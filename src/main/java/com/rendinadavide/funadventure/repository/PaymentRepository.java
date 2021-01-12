@@ -5,15 +5,13 @@ import com.rendinadavide.funadventure.domain.payment.Payment;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class PaymentRepository implements Repository<Payment> {
 
     private EntityManager em;
 
-    public PaymentRepository(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
+    public PaymentRepository(EntityManagerFactory emf){
         em = emf.createEntityManager();
     }
 

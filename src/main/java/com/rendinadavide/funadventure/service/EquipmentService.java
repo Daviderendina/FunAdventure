@@ -1,7 +1,9 @@
 package com.rendinadavide.funadventure.service;
 
 import com.rendinadavide.funadventure.domain.Equipment;
+import com.rendinadavide.funadventure.repository.AccessRepository;
 import com.rendinadavide.funadventure.repository.EquipmentRepository;
+import com.rendinadavide.funadventure.repository.RepositoryFactory;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +13,7 @@ public class EquipmentService {
     private EquipmentRepository equipmentRepository;
 
     public EquipmentService(){
-        equipmentRepository = new EquipmentRepository();
+        equipmentRepository = (EquipmentRepository) RepositoryFactory.getRepository(RepositoryFactory.RepositoryEntityType.EQUIPMENT);
     }
 
     public Equipment create(LocalDate purchaseDate, String sn){

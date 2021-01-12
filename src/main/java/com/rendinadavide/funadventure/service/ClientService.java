@@ -1,7 +1,9 @@
 package com.rendinadavide.funadventure.service;
 
 import com.rendinadavide.funadventure.domain.Client;
+import com.rendinadavide.funadventure.repository.AccessRepository;
 import com.rendinadavide.funadventure.repository.ClientRepository;
+import com.rendinadavide.funadventure.repository.RepositoryFactory;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +13,7 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     public ClientService(){
-        clientRepository = new ClientRepository();
+        clientRepository = (ClientRepository) RepositoryFactory.getRepository(RepositoryFactory.RepositoryEntityType.CLIENT);
     }
 
     public Client create(String name, String surname, LocalDate bDate){
