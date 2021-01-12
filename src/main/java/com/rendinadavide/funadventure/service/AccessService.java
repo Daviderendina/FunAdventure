@@ -6,6 +6,7 @@ import com.rendinadavide.funadventure.domain.Equipment;
 import com.rendinadavide.funadventure.domain.payment.Payment;
 import com.rendinadavide.funadventure.domain.payment.PaymentType;
 import com.rendinadavide.funadventure.repository.AccessRepository;
+import com.rendinadavide.funadventure.repository.RepositoryFactory;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class AccessService {
     private AccessRepository accessRepository;
 
     public AccessService(){
-        accessRepository = new AccessRepository();
+        accessRepository = (AccessRepository) RepositoryFactory.getRepository(RepositoryFactory.RepositoryEntityType.ACCESS);
     }
 
     public Access create(List<Client> clientList, List<Equipment> equipmentList) {

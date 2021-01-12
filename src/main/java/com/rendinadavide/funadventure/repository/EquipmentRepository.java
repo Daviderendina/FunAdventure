@@ -5,15 +5,13 @@ import com.rendinadavide.funadventure.domain.Equipment;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class EquipmentRepository implements Repository<Equipment> {
 
     private EntityManager em;
 
-    public EquipmentRepository(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
+    public EquipmentRepository(EntityManagerFactory emf){
         em = emf.createEntityManager();
     }
 

@@ -6,15 +6,13 @@ import com.rendinadavide.funadventure.domain.Equipment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class AccessRepository implements Repository<Access> {
 
     private EntityManager em;
 
-    public AccessRepository(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FunAdventure");
+    public AccessRepository(EntityManagerFactory emf){
         em = emf.createEntityManager();
     }
 

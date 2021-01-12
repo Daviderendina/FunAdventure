@@ -4,8 +4,6 @@ import com.rendinadavide.funadventure.domain.payment.*;
 
 public class PaymentFactory {
 
-    public enum PaymentType{CASH, CARD, VOUCHER}
-
     public static Payment getPayment(float amount, String str, PaymentType type){
         if(amount < 0) return null;
 
